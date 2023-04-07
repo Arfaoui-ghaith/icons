@@ -10,7 +10,7 @@ const getToken = async () => {
         const response = await fetch(process.env.URL1, { method: 'POST', body: formData })
         const data = await response.json()
 
-        console.log(data.data.token)
+        console.log(data)
         return data.data.token;
     } catch (e){
         return null;
