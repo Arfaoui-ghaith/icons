@@ -35,8 +35,16 @@ fastify.get('/icons/:q', async (request, reply) => {
     }
 });
 
+fastify.all('*', (request, reply) => {
+    reply.status(404).send({
+        status: 'fail',
+        message: `can't find ${request.url}`
+    });
+});
+
 //@Server
-fastify.listen(5000, (err) => {
+const port = process.env.PORT || 3000
+fastify.listen(port , (err) => {
     if (err) {
         console.log(err)
         process.exit(1)
