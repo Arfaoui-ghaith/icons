@@ -4,7 +4,7 @@ require('dotenv').config()
 const FormData = require('form-data');
 
 //Add routes here, discussed in further steps
-fastify.get('/icons/:q', async (request, reply) => {
+fastify.get('/icons/:q/', async (request, reply) => {
     try {
         const formData = new FormData();
         formData.append('apikey', process.env.APIKEY);
