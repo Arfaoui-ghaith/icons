@@ -13,7 +13,7 @@ const getToken = async () => {
         console.log(data)
         return data.data.token;
     } catch (e){
-        return null;
+        return e;
     }
 }
 
