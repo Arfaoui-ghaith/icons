@@ -1,7 +1,7 @@
 const fastify = require('fastify')({ logger: true })
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 require('dotenv').config()
-
+const FormData = require('form-data');
 const getToken = async () => {
     try{
         const formData = new FormData();
@@ -21,7 +21,7 @@ const getToken = async () => {
 fastify.get('/icons/:q', async (request, reply) => {
     try {
         const formData = new FormData();
-        formData.set('apikey', process.env.APIKEY);
+        formData.append('apikey', process.env.APIKEY);
 
         const response1 = await fetch(process.env.URL1, { method: 'POST', body: formData })
         const data1 = await response1.json()
