@@ -28,7 +28,7 @@ fastify.get('/icons/:q', async (request, reply) => {
         });
         const data = await response.json();
 
-        console.log(data);
+        console.log(data,token);
 
         reply.send(data.data.map(el => {
             return {name: `${el.description} ${el.family_name}`, image: el.images["24"]}
