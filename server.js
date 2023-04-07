@@ -20,7 +20,12 @@ const getToken = async () => {
 //Add routes here, discussed in further steps
 fastify.get('/icons/:q', async (request, reply) => {
     try {
-        const token = await getToken();
+        const formData = new FormData();
+        formData.set('apikey', process.env.APIKEY);
+
+        const response1 = await fetch(process.env.URL1, { method: 'POST', body: formData })
+        const data1 = await response1.json()
+        const token = data1.data.token;
 
         const response = await fetch(process.env.URL2 + request.params.q, {
             method: 'get',
