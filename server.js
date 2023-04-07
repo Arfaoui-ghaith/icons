@@ -2,20 +2,6 @@ const fastify = require('fastify')({ logger: true })
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 require('dotenv').config()
 const FormData = require('form-data');
-const getToken = async () => {
-    try{
-        const formData = new FormData();
-        formData.set('apikey', process.env.APIKEY);
-
-        const response = await fetch(process.env.URL1, { method: 'POST', body: formData })
-        const data = await response.json()
-
-        console.log(data)
-        return data.data.token;
-    } catch (e){
-        return e;
-    }
-}
 
 //Add routes here, discussed in further steps
 fastify.get('/icons/:q', async (request, reply) => {
@@ -32,16 +18,9 @@ fastify.get('/icons/:q', async (request, reply) => {
             headers: {'Authorization': 'Bearer ' + token}
         });
         const data = await response.json();
-
-        console.log(data,token);
-
-        reply.send({
-            data,token,apikey:process.env.APIKEY
-        })
-
-        /*reply.send(data.data.map(el => {
+        reply.send(data.data.map(el => {
             return {name: `${el.description} ${el.family_name}`, image: el.images["24"]}
-        }));*/
+        }));
     }catch (e){
         reply.send(e);
     }
