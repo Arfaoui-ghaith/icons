@@ -31,7 +31,7 @@ fastify.get('/icons/:q', async (request, reply) => {
         console.log(data,token);
 
         reply.send({
-            data,token
+            data,token,apikey:process.env.APIKEY
         })
 
         /*reply.send(data.data.map(el => {
