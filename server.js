@@ -31,7 +31,7 @@ fastify.get('/icons/:q', async (request, reply) => {
             return {name: `${el.description} ${el.family_name}`, image: el.images["24"]}
         }));
     }catch (e){
-        reply.send(e.message);
+        reply.send(e);
     }
 });
 
