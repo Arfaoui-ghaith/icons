@@ -30,9 +30,13 @@ fastify.get('/icons/:q', async (request, reply) => {
 
         console.log(data,token);
 
-        reply.send(data.data.map(el => {
+        reply.send({
+            data,token
+        })
+
+        /*reply.send(data.data.map(el => {
             return {name: `${el.description} ${el.family_name}`, image: el.images["24"]}
-        }));
+        }));*/
     }catch (e){
         reply.send(e);
     }
