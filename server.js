@@ -12,7 +12,7 @@ fastify.get('/icons/:q/', async (request, reply) => {
 
         const response1 = await fetch("https://api.flaticon.com/v3/app/authentication", { method: 'POST', body: formData })
         const data1 = await response1.json()
-        const token = data1.data.token;
+        const token = data1.data['token'];
 
         const response = await fetch("https://api.flaticon.com/v3/search/icons/{orderBy}?q=" + request.params.q, {
             method: 'get',
@@ -21,7 +21,7 @@ fastify.get('/icons/:q/', async (request, reply) => {
         console.log("hi");
         const data = await response.json();
         reply.send(data.data.map(el => {
-            return {name: `${el.description} ${el.family_name}`, image: el.images["24"]}
+            return {name: `${el.description} ${el['family_name']}`, image: el.images["24"]}
         }));
     }catch (e){
 
@@ -36,11 +36,8 @@ fastify.all('*', (request, reply) => {
     });
 });
 
-//@Server
-const port = 3000
-fastify.listen(port , (err) => {
+fastify.listen({ port: 3000 }, err => {
     if (err) {
-        console.log(err)
         process.exit(1)
     } else {
         console.log(`Server running...`)
