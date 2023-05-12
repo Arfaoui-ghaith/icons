@@ -36,8 +36,10 @@ fastify.all('*', (request, reply) => {
     });
 });
 
+//@Server
 fastify.listen({ port: 3000 }, err => {
     if (err) {
+        console.log(err)
         process.exit(1)
     } else {
         console.log(`Server running...`)
